@@ -36,7 +36,23 @@ def insert_messege_data(conn, list):
     try:
         with conn.cursor() as cur:
             # SQL 쿼리 작성
-            sql = "INSERT INTO address (id, data_type, seperate, send_from, send_time, content, send_place) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+            sql = '''
+            INSERT INTO crawling_data (
+                id, 
+                data_type, 
+                seperate, 
+                send_from, 
+                send_time, 
+                content, 
+                send_place_1,
+                send_place_2, 
+                send_place_3,
+                send_place_4,
+                send_place_5
+                ) VALUES (
+                        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            
+            '''
             # 여러 데이터를 한 번에 삽입
             cur.executemany(sql, list)
             # 변경 사항 저장

@@ -102,7 +102,7 @@ print(max_page)
 next_button = driver.find_element(By.ID, "apagenext")
 
 while current_page <= max_page:
-    time.sleep(3)
+    time.sleep(5)
     # tbody 안의 모든 tr 요소 가져오기
     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.TAG_NAME, 'tbody')))
     tbody = driver.find_element(By.TAG_NAME, 'tbody')
@@ -146,5 +146,5 @@ df_data_split = pd.DataFrame(df['data'].tolist(), columns=['ID', '유형', '분�
 df_split = df["send_place"].str.split(",", expand=True)
 df_combined = pd.concat([df_data_split, df_split], axis=1)
 
-df_combined.to_csv('indexing_file.csv', index=True, encoding="ANSI")
+df_combined.to_csv('indexing_file.csv', index=False, encoding="ANSI")
 
