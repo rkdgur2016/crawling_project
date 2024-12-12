@@ -1,4 +1,4 @@
-from DB_connection import db_connection, insert_messege_data
+from DB_connection import db_connection, insert_messege_data, select_addr_code
 import pandas as pd
 import numpy as np
 

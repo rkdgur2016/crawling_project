@@ -10,6 +10,13 @@ filtered_arr = [row for row in df if row[2] == '존재']
 print(filtered_arr)
 
 processed_data = []
+for row in filtered_arr :
+    address_code = row[0]
+    full_address = row[1]
+
+    processed_data.append((address_code, full_address))
+"""
+processed_data = []
 for row in filtered_arr:
     try:
         address_code = row[0]
@@ -26,8 +33,8 @@ for row in filtered_arr:
 
     except Exception as e:
         print(f"오류 발생: {e}, 데이터: {row}")
-
 print(processed_data)
+"""
 insert_addr_data(conn, processed_data)
 
 conn.close()

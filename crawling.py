@@ -7,6 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import csv
 import pandas as pd
+from DB_connection import db_connection, select_addr_code
 
 
 # 크롬 드라이버 생성
@@ -145,6 +146,3 @@ df_data_split = pd.DataFrame(df['data'].tolist(), columns=['ID', '유형', '분�
 # 'send_place'와 병합
 df_split = df["send_place"].str.split(",", expand=True)
 df_combined = pd.concat([df_data_split, df_split], axis=1)
-
-df_combined.to_csv('indexing_file.csv', index=False, encoding="ANSI")
-
