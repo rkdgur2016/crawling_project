@@ -61,6 +61,88 @@ def insert_exercise_part(conn, id, target):
     except Exception as e:
         print("데이터 삽입 중 오류 발생:", e)
 
+#운동 데이터 insert
+def insert_exercise(conn, id, target):
+    try:
+        with conn.cursor() as cur:
+            # SQL 쿼리 작성
+            sql = '''
+                    INSERT INTO EXERCISE(part_id, name) VALUES (%s, %s)
+                    '''
+            # 여러 데이터를 한 번에 삽입
+            cur.execute(sql, (id, target))
+            # 변경 사항 저장
+            conn.commit()
+            print(f"{target}이이 성공적으로 삽입되었습니다.")
+    except Exception as e:
+        print("데이터 삽입 중 오류 발생:", e)
+
+#운동 데이터 조회
+def select_exercise(conn, id):
+    try:
+        with conn.cursor() as cur:
+            # SQL 쿼리 작성
+            sql = '''
+                    SELECT count(t1.name)
+                    FROM EXERCISE_PART t1, EXERCISE_CATEGORY t2 
+                    WHERE t1.category_id = t2.id
+                        AND t2.id = %s
+                    '''
+            # 여러 데이터를 한 번에 삽입
+            
+            cur.execute(sql, id)
+            result = cur.fetchone()
+            print(f'{result}의 결과를 조회했습니다')
+
+            return result
+    except Exception as e:
+        print("데이터 삽입 중 오류 발생:", e)
+
+
+#운동 데이터 조회
+def select_exercise_part_id(conn, name, category_id):
+    try:
+        with conn.cursor() as cur:
+            # SQL 쿼리 작성
+            sql = '''
+                    SELECT id
+                      FROM EXERCISE_PART
+                     WHERE name = %s
+                      AND category_id = %s
+                    '''
+            # 여러 데이터를 한 번에 삽입
+            
+            cur.execute(sql, (name, category_id))
+            result = cur.fetchone()
+
+            print(f'{result}의 결과를 조회했습니다')
+
+            return result
+    except Exception as e:
+        print("데이터 삽입 중 오류 발생:", e)
+
+
+#운동 데이터 조회
+def select_exercise_category_id(conn, name):
+    try:
+        with conn.cursor() as cur:
+            # SQL 쿼리 작성
+            sql = '''
+                     SELECT id
+                        FROM EXERCISE_CATEGORY
+                        WHERE name = %s
+                    '''
+            # 여러 데이터를 한 번에 삽입
+            
+            cur.execute(sql, name)
+            result = cur.fetchone()
+
+            print(f'{result}의 결과를 조회했습니다')
+
+            return result
+    except Exception as e:
+        print("데이터 삽입 중 오류 발생:", e)
+
 if __name__ == "__main__" :
     main()
 
